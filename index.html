@@ -90,7 +90,26 @@
     <div class="free">10:00</div>
     <div class="free">10:45</div>
   </div>
+<div class="booking-form">
+    <h3>Rezerwacja lekcji</h3>
 
+    <input type="text" id="name" placeholder="Imię i nazwisko">
+
+    <input type="tel" id="phone" placeholder="Numer telefonu">
+
+    <input type="hidden" id="selectedDay">
+    <input type="hidden" id="selectedHour">
+
+    <p>Wybrany termin: <span id="selectedTerm">Nie wybrano</span></p>
+
+    <select id="people">
+        <option value="1">1 osoba - 100 zł</option>
+        <option value="2">2 osoby - 140 zł</option>
+        <option value="3">3 osoby - 180 zł</option>
+    </select>
+
+    <button onclick="bookLesson()">Zarezerwuj</button>
+</div>
 </div>
 </section>
 
