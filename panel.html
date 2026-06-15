@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Panel Instruktora</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#f4f7fb;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    color:#0077cc;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th,td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+th{
+    background:#0077cc;
+    color:white;
+}
+
+button{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    cursor:pointer;
+    border-radius:5px;
+}
+</style>
+</head>
+<body>
+
+<h1>Panel Instruktora</h1>
+
+<table>
+<thead>
+<tr>
+<th>Klient</th>
+<th>Telefon</th>
+<th>Dzień</th>
+<th>Godzina</th>
+<th>Osoby</th>
+<th>Usuń</th>
+</tr>
+</thead>
+
+<tbody id="reservations"></tbody>
+</table>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAclnGEqvK5w6lZbr2g-u9TItaQwwjd-bo",
+  authDomain: "projekt-plywanie-a02d8.firebaseapp.com",
+  projectId: "projekt-plywanie-a02d8",
+  storageBucket: "projekt-plywanie-a02d8.firebasestorage.app",
+  messagingSenderId: "357063939995",
+  appId: "1:357063939995:web:67038b0ce3ba27aa0fb33e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const table = document.getElementById("reservations");
+
+async function loadReservations(){
+
+    table.innerHTML = "";
+
+    const snapshot =
+        await getDocs(collection(db,"rezerwacje"));
+
+    snapshot.forEach((item)=>{
+
+        const data = item.data();
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+        <td>${data.name || "-"}</td>
+        <td>${data.phone || "-"}</td>
+        <td>${data.day || "-"}</td>
+        <td>${data.hour || data.time || "-"}</td>
+        <td>${data.people || "-"}</td>
+        <td>
+            <button onclick="removeReservation('${item.id}')">
+                Usuń
+            </button>
+        </td>
+        `;
+
+        table.appendChild(row);
+    });
+}
+
+window.removeReservation = async function(id){
+
+    if(!confirm("Usunąć rezerwację?")) return;
+
+    await deleteDoc(doc(db,"rezerwacje",id));
+
+    loadReservations();
+}
+
+loadReservations();
+</script>
+
+</body>
+</html>
