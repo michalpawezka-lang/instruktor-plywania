@@ -238,16 +238,25 @@ async function loadCalendar() {
       const el = document.createElement("div");
       el.className = "slot";
 
-      if (!q.empty) {
-        el.classList.add("busy");
-        el.innerText = hour + " ❌";
-      } else {
-        el.classList.add("free");
-        el.innerText = hour + " ✔";
+  if(!q.empty){
 
-        el.onclick = () => book(day, hour);
-      }
+    div.classList.add("busy");
+    div.innerText = hour + " ZAJĘTE";
 
+} else {
+
+    div.classList.add("free");
+    div.innerText = hour + " WOLNE";
+
+    div.onclick = () => {
+
+        document.getElementById("selectedDay").value = day;
+        document.getElementById("selectedHour").value = hour;
+
+        document.getElementById("selectedTerm").innerText =
+            day + " | " + hour;
+    };
+}
       slots.appendChild(el);
     }
 
