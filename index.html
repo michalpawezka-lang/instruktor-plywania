@@ -231,7 +231,7 @@ async function loadCalendar() {
       const q = await getDocs(query(
         collection(db,"rezerwacje"),
         where("day","==",day),
-        where("time","==",hour)
+        where("hour","==",hour)
       ));
 
       const el = document.createElement("div");
