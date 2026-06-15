@@ -90,11 +90,9 @@ footer{
 
 .free{
     background:#e7f7ee;
-    border:1px solid #2ecc71;
-    padding:10px;
-    margin:8px 0;
-    border-radius:8px;
-    text-align:center;
+    border:2px solid #2ecc71;
+    color:#27ae60;
+    font-weight:bold;
     cursor:pointer;
     transition:0.2s;
 }
@@ -104,8 +102,11 @@ footer{
 }
 
 .busy{
-    background:#ffe6e6;
-    border:1px solid #e74c3c;
+    background:#ffdddd;
+    border:2px solid #e74c3c;
+    color:#c0392b;
+    font-weight:bold;
+    cursor:not-allowed;
 }
 .booking-form{
     background:white;
