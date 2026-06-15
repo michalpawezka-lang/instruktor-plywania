@@ -224,8 +224,39 @@ window.book = async function(day, time) {
   alert("Zarezerwowano!");
   loadCalendar();
 };
+window.bookLesson = async function(){
 
-loadCalendar();
+    const name =
+        document.getElementById("name").value;
+
+    const phone =
+        document.getElementById("phone").value;
+
+    const day =
+        document.getElementById("selectedDay").value;
+
+    const hour =
+        document.getElementById("selectedHour").value;
+
+    const people =
+        document.getElementById("people").value;
+
+    if(!name || !phone || !day || !hour){
+        alert("Wypełnij wszystkie pola.");
+        return;
+    }
+
+    await addDoc(collection(db,"rezerwacje"),{
+        name,
+        phone,
+        day,
+        hour,
+        people,
+        createdAt: new Date()
+    });
+
+    alert("Rezerwacja została zapisana!");
+};
 </script>
 
 </body>
