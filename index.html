@@ -77,8 +77,7 @@
 </section>
 <section id="rezerwacje">
   <h2>Rezerwacje lekcji</h2>
-  <div class="schedule">
-
+  <div id="calendar" class="schedule">
   <div class="day-column">
     <h3>Poniedziałek</h3>
     <div class="free">06:15</div>
@@ -240,15 +239,14 @@ async function loadCalendar() {
 
   if(!q.empty){
 
-    div.classList.add("busy");
-    div.innerText = hour + " ZAJĘTE";
+    el.classList.add("busy");
+el.innerText = hour + " ZAJĘTE";
 
 } else {
+el.classList.add("free");
+el.innerText = hour + " WOLNE";
 
-    div.classList.add("free");
-    div.innerText = hour + " WOLNE";
-
-    div.onclick = () => {
+    el.onclick = () => {
 
         document.getElementById("selectedDay").value = day;
         document.getElementById("selectedHour").value = hour;
